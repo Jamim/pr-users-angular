@@ -1,0 +1,27 @@
+<div>
+  <label>Login:
+    <input [(ngModel)]="newUser.username" required>
+  </label>
+</div>
+<div>
+  <label>Password:
+    <input [(ngModel)]="newUser.password" type="password" required>
+  </label>
+</div>
+<div>
+  <label>First Name:
+    <input [(ngModel)]="newUser.firstName" required>
+  </label>
+</div>
+<div>
+  <label>Last Name:
+    <input [(ngModel)]="newUser.lastName" required>
+  </label>
+</div>
+<div>
+  <label>Email:
+    <input [(ngModel)]="newUser.email" required>
+  </label>
+</div>
+
+<button (click)="signUp()">Submit!</button>

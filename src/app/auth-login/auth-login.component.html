@@ -1,0 +1,16 @@
+<div>
+  <label>Login:
+    <input #username required>
+  </label>
+</div>
+<div>
+  <label>Password:
+    <input #password type="password" required>
+  </label>
+</div>
+<button (click)="
+      login(username.value, password.value);
+      username.value='';
+      password.value=''">
+  Submit!
+</button>

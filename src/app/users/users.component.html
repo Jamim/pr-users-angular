@@ -1,0 +1,42 @@
+<h2>User list</h2>
+
+<button *ngIf="!newUser" (click)="initNewUser()">Add new</button>
+<div *ngIf="newUser">
+  <div>
+    <label>Login:
+      <input [(ngModel)]="newUser.username" required>
+    </label>
+  </div>
+  <div>
+    <label>Password:
+      <input [(ngModel)]="newUser.password" type="password" required>
+    </label>
+  </div>
+  <div>
+    <label>First Name:
+      <input [(ngModel)]="newUser.firstName" required>
+    </label>
+  </div>
+  <div>
+    <label>Last Name:
+      <input [(ngModel)]="newUser.lastName" required>
+    </label>
+  </div>
+  <div>
+    <label>Email:
+      <input [(ngModel)]="newUser.email" required>
+    </label>
+  </div>
+  <button (click)="addUser()">Submit</button>
+  <button (click)="newUser=null">Cancel</button>
+</div>
+
+<ul class="users">
+  <li *ngFor="let user of users">
+    <a routerLink="/details/{{user.id}}">
+      <span class="badge">{{user.id}}</span> {{user.username}}
+    </a>
+    <button class="delete" title="delete user"
+        (click)="deleteUser(user)">x</button>
+  </li>
+</ul>

@@ -1,0 +1,27 @@
+<div *ngIf="user">
+  <h2>{{ user.username }} Details</h2>
+  <div>
+    <div>
+      <label>Login:
+        <input [(ngModel)]="user.username" required>
+      </label>
+    </div>
+    <div>
+      <label>First Name:
+        <input [(ngModel)]="user.firstName" required>
+      </label>
+    </div>
+    <div>
+      <label>Last Name:
+        <input [(ngModel)]="user.lastName" required>
+      </label>
+    </div>
+    <div>
+      <label>Email:
+        <input [(ngModel)]="user.email" required>
+      </label>
+    </div>
+  </div>
+  <button (click)="goBack()">go back</button>
+  <button (click)="save()">save</button>
+</div>

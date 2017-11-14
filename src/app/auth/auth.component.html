@@ -1,0 +1,11 @@
+<div *ngIf="authService.loggedIn !== null">
+  <div *ngIf="!authService.loggedIn">
+
+    <button (click)="setMode(true)">SignUp</button>
+    <button (click)="setMode(false)">Login</button>
+
+    <app-auth-login *ngIf="!signUpMode"></app-auth-login>
+    <app-auth-sign-up *ngIf="signUpMode"></app-auth-sign-up>
+
+  </div>
+</div>
