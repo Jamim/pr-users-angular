@@ -9,14 +9,10 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent implements OnInit {
-  signUpMode = true;
+  authMode = 'login';
 
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
-  }
-
-  setMode(mode: boolean): void {
-    this.signUpMode = mode;
   }
 }
