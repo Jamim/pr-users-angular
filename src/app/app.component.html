@@ -1,11 +1,57 @@
-<h1>Welcome to the PR Users demo!</h1>
-<nav>
-  <a *ngIf="authService.loggedIn === false" routerLink="/auth">
-    SignUp/Log in
-  </a>
-  <a *ngIf="authService.loggedIn" routerLink="/logout">
-    Logout
-  </a>
-  <a routerLink="/users">Users</a>
-</nav>
-<router-outlet></router-outlet>
+<div class="container" style="padding-left: 0; padding-right: 0;">
+  <header>
+    <nav class="navbar navbar-light navbar-fixed-top navbar-expand-lg">
+
+      <a class="navbar-brand"
+         routerLink="/"
+         (click)="navbarCollapsed = true">
+        PR Users demo!
+      </a>
+
+      <button class="navbar-toggler navbar-toggler-right"
+              type="button" (click)="navbarCollapsed = !navbarCollapsed"
+              [attr.aria-expanded]="!navbarCollapsed"
+              aria-controls="navbarContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse" [ngbCollapse]="navbarCollapsed"
+           id="navbarContent">
+        <ul class="navbar-nav mr-auto">
+
+          <li class="nav-item" [routerLinkActive]="['active']">
+            <a class="nav-link"
+               routerLink="/users"
+               (click)="navbarCollapsed = true">
+              Users
+            </a>
+          </li>
+
+          <li *ngIf="authService.loggedIn === false" class="nav-item"
+              [routerLinkActive]="['active']">
+            <a class="nav-link" routerLink="/auth"
+               (click)="navbarCollapsed = true">
+              SignUp/Log in
+            </a>
+          </li>
+
+          <li *ngIf="authService.loggedIn" class="nav-item"
+              [routerLinkActive]="['active']">
+            <a class="nav-link" routerLink="/logout"
+               (click)="navbarCollapsed = true">
+              Logout
+            </a>
+          </li>
+
+        </ul>
+      </div>
+
+    </nav>
+  </header>
+</div>
+
+<div>
+  <router-outlet></router-outlet>
+</div>
