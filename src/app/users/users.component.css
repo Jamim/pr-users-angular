@@ -1,0 +1,16 @@
+h3 {
+  margin-bottom: 24px;
+}
+
+.user {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.user .btn-info {
+  width: 80%;
+}
+
+#addSomeone {
+  margin-top: 6px;
+}

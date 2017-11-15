@@ -1,42 +1,47 @@
-<h2>User list</h2>
+<div class="container">
 
-<button *ngIf="!newUser" (click)="initNewUser()">Add new</button>
-<div *ngIf="newUser">
-  <div>
-    <label>Login:
-      <input [(ngModel)]="newUser.username" required>
-    </label>
+  <h3>Behold the Users!</h3>
+
+  <div class="users">
+    <div class="user" *ngFor="let user of users">
+      <button routerLink="/details/{{user.id}}" class="btn btn-info">
+        {{user.firstName}} {{user.lastName}}
+      </button>
+      <button class="delete" title="delete user" class="btn btn-dannger"
+          (click)="deleteUser(user)">x</button>
+    </div>
   </div>
-  <div>
-    <label>Password:
-      <input [(ngModel)]="newUser.password" type="password" required>
-    </label>
+
+  <button *ngIf="!newUser" (click)="initNewUser()" class="btn btn-light"
+          id="addSomeone">
+    Add someone else
+  </button>
+
+  <div *ngIf="newUser" class="form-signin">
+
+    <label for="inputUsername" class="sr-only">Username</label>
+    <input [(ngModel)]="newUser.username" class="form-control first-input"
+           id="inputUsername" placeholder="Username" required autofocus>
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input [(ngModel)]="newUser.password" class="form-control middle-input"
+           id="inputPassword" placeholder="Password" required type="password">
+
+    <label for="inputFirstName" class="sr-only">First Name</label>
+    <input [(ngModel)]="newUser.firstName" class="form-control middle-input"
+           id="inputFirstName" placeholder="First Name" required autofocus>
+
+    <label for="inputLastName" class="sr-only">Last Name</label>
+    <input [(ngModel)]="newUser.lastName" class="form-control middle-input"  id="inputLastName"
+           placeholder="Last Name" required autofocus>
+
+    <label for="inputEmail" class="sr-only">Username</label>
+    <input [(ngModel)]="newUser.email" class="form-control last-input" id="inputEmail"
+           placeholder="Email" required autofocus>
+
+    <button (click)="addUser()" class="btn btn-success">Submit</button>
+    <button (click)="newUser=null" class="btn btn-light">Cancel</button>
+
   </div>
-  <div>
-    <label>First Name:
-      <input [(ngModel)]="newUser.firstName" required>
-    </label>
-  </div>
-  <div>
-    <label>Last Name:
-      <input [(ngModel)]="newUser.lastName" required>
-    </label>
-  </div>
-  <div>
-    <label>Email:
-      <input [(ngModel)]="newUser.email" required>
-    </label>
-  </div>
-  <button (click)="addUser()">Submit</button>
-  <button (click)="newUser=null">Cancel</button>
+
 </div>
-
-<ul class="users">
-  <li *ngFor="let user of users">
-    <a routerLink="/details/{{user.id}}">
-      <span class="badge">{{user.id}}</span> {{user.username}}
-    </a>
-    <button class="delete" title="delete user"
-        (click)="deleteUser(user)">x</button>
-  </li>
-</ul>
