@@ -10,15 +10,15 @@
 
   <label for="inputFirstName" class="sr-only">First Name</label>
   <input [(ngModel)]="newUser.firstName" class="form-control middle-input"
-         id="inputFirstName" placeholder="First Name" required autofocus>
+         id="inputFirstName" placeholder="First Name" required>
 
   <label for="inputLastName" class="sr-only">Last Name</label>
-  <input [(ngModel)]="newUser.lastName" class="form-control middle-input"  id="inputLastName"
-         placeholder="Last Name" required autofocus>
+  <input [(ngModel)]="newUser.lastName" class="form-control middle-input"
+         id="inputLastName" placeholder="Last Name" required>
 
   <label for="inputEmail" class="sr-only">Username</label>
-  <input [(ngModel)]="newUser.email" class="form-control last-input" id="inputEmail"
-         placeholder="Email" required autofocus>
+  <input [(ngModel)]="newUser.email" class="form-control last-input"
+         id="inputEmail" placeholder="Email" required>
 
   <button class="btn btn-lg btn-primary btn-block"
           type="submit" (click)="signUp()">

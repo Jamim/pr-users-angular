@@ -1,27 +1,36 @@
-<div *ngIf="user">
-  <h2>{{ user.username }} Details</h2>
-  <div>
-    <div>
-      <label>Login:
-        <input [(ngModel)]="user.username" required>
-      </label>
+<div class="container">
+  <div *ngIf="user" class="form-signin">
+
+    <h3>{{user.username}} details</h3>
+
+    <div class="label-container">
+      <label for="inputUsername">Username</label>
     </div>
-    <div>
-      <label>First Name:
-        <input [(ngModel)]="user.firstName" required>
-      </label>
+    <input [(ngModel)]="user.username" class="form-control"
+           id="inputUsername" placeholder="Username" required autofocus>
+
+    <div class="label-container">
+      <label for="inputFirstName">First Name</label>
     </div>
-    <div>
-      <label>Last Name:
-        <input [(ngModel)]="user.lastName" required>
-      </label>
+    <input [(ngModel)]="user.firstName" class="form-control"
+           id="inputFirstName" placeholder="First Name" required>
+
+    <div class="label-container">
+      <label for="inputLastName">Last Name</label>
     </div>
-    <div>
-      <label>Email:
-        <input [(ngModel)]="user.email" required>
-      </label>
+    <input [(ngModel)]="user.lastName" class="form-control"
+           id="inputLastName" placeholder="Last Name" required>
+
+    <div class="label-container">
+      <label for="inputEmail">Username</label>
     </div>
+    <input [(ngModel)]="user.email" class="form-control"
+           id="inputEmail" placeholder="Email" required>
+
+    <div class="buttons-container">
+      <button (click)="save()" class="btn btn-success">Submit changes</button>
+      <button (click)="goBack()" class="btn btn-light">Discard</button>
+    </div>
+
   </div>
-  <button (click)="goBack()">go back</button>
-  <button (click)="save()">save</button>
 </div>
