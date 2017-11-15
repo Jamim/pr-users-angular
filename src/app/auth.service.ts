@@ -19,6 +19,7 @@ export class AuthService {
   private logoutUrl = '/api/auth/logout/';
 
   loggedIn: boolean;
+  loginChecked = false;
 
   constructor(
     private http: HttpClient,
@@ -27,7 +28,10 @@ export class AuthService {
 
   checkLogin() {
     this.http.get(this.loginUrl).pipe(
-      tap(_ => this.loggedIn = true),
+      tap(_ => {
+        this.loggedIn = true;
+        this.loginChecked = true;
+      }),
       catchError(this.handleError<any>('checkLogin'))
     ).subscribe();
   }
@@ -59,10 +63,11 @@ export class AuthService {
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-      console.error(error);
-
       if (operation === 'checkLogin') {
         this.loggedIn = false;
+        this.loginChecked = true;
+      } else {
+        console.error(error);
       }
 
       return of(result as T);

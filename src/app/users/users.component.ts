@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { User, NewUser } from '../user';
+import { AuthService } from '../auth.service';
 import { UserService } from '../user.service';
 
 @Component({
@@ -13,7 +14,10 @@ export class UsersComponent implements OnInit {
   users: User[];
   newUser: NewUser;
 
-  constructor(private userService: UserService) { }
+  constructor(
+    public authService: AuthService,
+    private userService: UserService,
+  ) { }
 
   ngOnInit(): void {
     this.getUsers();
@@ -30,8 +34,14 @@ export class UsersComponent implements OnInit {
   }
 
   getUsers(): void {
-    this.userService.getUsers()
-        .subscribe(users => this.users = users);
+    if (this.authService.loginChecked) {
+      if (this.authService.loggedIn) {
+        this.userService.getUsers()
+            .subscribe(users => this.users = users);
+      }
+    } else {
+      setTimeout(_ => this.getUsers(), 100);
+    }
   }
 
   addUser(): void {

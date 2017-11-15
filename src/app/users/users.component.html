@@ -1,47 +1,60 @@
 <div class="container">
 
-  <h3>Behold the Users!</h3>
+  <div *ngIf="authService.loggedIn">
 
-  <div class="users">
-    <div class="user" *ngFor="let user of users">
-      <button routerLink="/details/{{user.id}}" class="btn btn-info">
-        {{user.firstName}} {{user.lastName}}
-      </button>
-      <button class="delete" title="delete user" class="btn btn-dannger"
-          (click)="deleteUser(user)">x</button>
+    <h3 *ngIf="users">Behold the Users!</h3>
+    <h3 *ngIf="!users">Please, wait for a moment…</h3>
+
+    <div class="users">
+      <div class="user" *ngFor="let user of users">
+        <button routerLink="/details/{{user.id}}" class="btn btn-info">
+          {{user.firstName}} {{user.lastName}}
+        </button>
+        <button class="delete" title="delete user" class="btn btn-dannger"
+            (click)="deleteUser(user)">x</button>
+      </div>
     </div>
+
+    <button *ngIf="!newUser" (click)="initNewUser()" class="btn btn-light"
+            id="addSomeone">
+      Add someone else
+    </button>
+
+    <div *ngIf="newUser" class="form-signin">
+
+      <label for="inputUsername" class="sr-only">Username</label>
+      <input [(ngModel)]="newUser.username" class="form-control first-input"
+             id="inputUsername" placeholder="Username" required autofocus>
+
+      <label for="inputPassword" class="sr-only">Password</label>
+      <input [(ngModel)]="newUser.password" class="form-control middle-input"
+             id="inputPassword" placeholder="Password" required type="password">
+
+      <label for="inputFirstName" class="sr-only">First Name</label>
+      <input [(ngModel)]="newUser.firstName" class="form-control middle-input"
+             id="inputFirstName" placeholder="First Name" required>
+
+      <label for="inputLastName" class="sr-only">Last Name</label>
+      <input [(ngModel)]="newUser.lastName" class="form-control middle-input"
+             id="inputLastName" placeholder="Last Name" required>
+
+      <label for="inputEmail" class="sr-only">Username</label>
+      <input [(ngModel)]="newUser.email" class="form-control last-input"
+             id="inputEmail" placeholder="Email" required>
+
+      <button (click)="addUser()" class="btn btn-success">Submit</button>
+      <button (click)="newUser=null" class="btn btn-light">Cancel</button>
+
+    </div>
+
   </div>
 
-  <button *ngIf="!newUser" (click)="initNewUser()" class="btn btn-light"
-          id="addSomeone">
-    Add someone else
-  </button>
-
-  <div *ngIf="newUser" class="form-signin">
-
-    <label for="inputUsername" class="sr-only">Username</label>
-    <input [(ngModel)]="newUser.username" class="form-control first-input"
-           id="inputUsername" placeholder="Username" required autofocus>
-
-    <label for="inputPassword" class="sr-only">Password</label>
-    <input [(ngModel)]="newUser.password" class="form-control middle-input"
-           id="inputPassword" placeholder="Password" required type="password">
-
-    <label for="inputFirstName" class="sr-only">First Name</label>
-    <input [(ngModel)]="newUser.firstName" class="form-control middle-input"
-           id="inputFirstName" placeholder="First Name" required>
-
-    <label for="inputLastName" class="sr-only">Last Name</label>
-    <input [(ngModel)]="newUser.lastName" class="form-control middle-input"
-           id="inputLastName" placeholder="Last Name" required>
-
-    <label for="inputEmail" class="sr-only">Username</label>
-    <input [(ngModel)]="newUser.email" class="form-control last-input"
-           id="inputEmail" placeholder="Email" required>
-
-    <button (click)="addUser()" class="btn btn-success">Submit</button>
-    <button (click)="newUser=null" class="btn btn-light">Cancel</button>
-
+  <div *ngIf="authService.loggedIn === false">
+    <h2>
+      We are so sorry, but there is nothing to show for anonymous persons!
+    </h2>
+    <br>
+    <h3>Just try to <a routerLink="/auth">log in</a> to fix that!</h3>
   </div>
 
 </div>
