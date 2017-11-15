@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 
@@ -12,6 +13,7 @@ export class AuthLogoutComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
+    private router: Router,
     private location: Location
   ) { }
 
@@ -22,7 +24,7 @@ export class AuthLogoutComponent implements OnInit {
     this.authService.logout().subscribe(
       _ => {
         if (!this.authService.loggedIn) {
-          this.goBack();
+          this.router.navigateByUrl('/auth');
         }
       }
     );

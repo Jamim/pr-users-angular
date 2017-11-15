@@ -7,6 +7,7 @@ import { UsersComponent } from './users/users.component';
 import { UserDetailsComponent } from './user-details/user-details.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/users', pathMatch: 'full'},
   { path: 'auth', component: AuthComponent },
   { path: 'logout', component: AuthLogoutComponent },
   { path: 'users', component: UsersComponent },

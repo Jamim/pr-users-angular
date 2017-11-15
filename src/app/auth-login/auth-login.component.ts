@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 
@@ -12,7 +12,7 @@ export class AuthLoginComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private location: Location
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -22,13 +22,9 @@ export class AuthLoginComponent implements OnInit {
     this.authService.login(username, password).subscribe(
       _ => {
         if (this.authService.loggedIn) {
-          this.goBack();
+          this.router.navigateByUrl('/users');
         }
       }
     );
-  }
-
-  goBack(): void {
-    this.location.back();
   }
 }

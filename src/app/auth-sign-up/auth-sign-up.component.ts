@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { AuthService } from '../auth.service';
 import { NewUser } from '../user';
@@ -14,7 +14,7 @@ export class AuthSignUpComponent implements OnInit {
 
   constructor(
     public authService: AuthService,
-    private location: Location
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -36,13 +36,9 @@ export class AuthSignUpComponent implements OnInit {
       _ => {
         if (this.authService.loggedIn) {
           this.initNewUser();
-          this.goBack();
+          this.router.navigateByUrl('/users');
         }
       }
     );
-  }
-
-  goBack(): void {
-    this.location.back();
   }
 }
