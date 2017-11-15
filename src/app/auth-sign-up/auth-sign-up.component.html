@@ -1,27 +1,28 @@
-<div>
-  <label>Username:
-    <input [(ngModel)]="newUser.username" required>
-  </label>
-</div>
-<div>
-  <label>Password:
-    <input [(ngModel)]="newUser.password" type="password" required>
-  </label>
-</div>
-<div>
-  <label>First Name:
-    <input [(ngModel)]="newUser.firstName" required>
-  </label>
-</div>
-<div>
-  <label>Last Name:
-    <input [(ngModel)]="newUser.lastName" required>
-  </label>
-</div>
-<div>
-  <label>Email:
-    <input [(ngModel)]="newUser.email" required>
-  </label>
-</div>
+<div class="form-signin">
 
-<button (click)="signUp()">Submit!</button>
+  <label for="inputUsername" class="sr-only">Username</label>
+  <input [(ngModel)]="newUser.username" class="form-control first-input"
+         id="inputUsername" placeholder="Username" required autofocus>
+
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input [(ngModel)]="newUser.password" class="form-control middle-input"
+         id="inputPassword" placeholder="Password" required type="password">
+
+  <label for="inputFirstName" class="sr-only">First Name</label>
+  <input [(ngModel)]="newUser.firstName" class="form-control middle-input"
+         id="inputFirstName" placeholder="First Name" required autofocus>
+
+  <label for="inputLastName" class="sr-only">Last Name</label>
+  <input [(ngModel)]="newUser.lastName" class="form-control middle-input"  id="inputLastName"
+         placeholder="Last Name" required autofocus>
+
+  <label for="inputEmail" class="sr-only">Username</label>
+  <input [(ngModel)]="newUser.email" class="form-control last-input" id="inputEmail"
+         placeholder="Email" required autofocus>
+
+  <button class="btn btn-lg btn-primary btn-block"
+          type="submit" (click)="signUp()">
+    Submit!
+  </button>
+
+</div>

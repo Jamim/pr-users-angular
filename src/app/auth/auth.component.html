@@ -2,16 +2,18 @@
   <div *ngIf="authService.loggedIn !== null">
     <div *ngIf="!authService.loggedIn">
 
-      <div class="btn-group" ngbRadioGroup name="radioBasic"
-           [(ngModel)]="authMode">
-        <label ngbButtonLabel class="btn-primary">
-          <input ngbButton type="radio" value="login">
-          Log In
-        </label>
-        <label ngbButtonLabel class="btn-primary">
-          <input ngbButton type="radio" value="signup">
-          Sign Up
-        </label>
+      <div class="form-signin form-mode">
+        <div class="btn-group" ngbRadioGroup name="radioBasic"
+             [(ngModel)]="authMode">
+          <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" value="login">
+            Log In
+          </label>
+          <label ngbButtonLabel class="btn-primary">
+            <input ngbButton type="radio" value="signup">
+            Sign Up
+          </label>
+        </div>
       </div>
 
       <app-auth-login *ngIf="authMode === 'login'"></app-auth-login>

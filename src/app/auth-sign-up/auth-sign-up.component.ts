@@ -7,7 +7,7 @@ import { NewUser } from '../user';
 @Component({
   selector: 'app-auth-sign-up',
   templateUrl: './auth-sign-up.component.html',
-  styleUrls: ['./auth-sign-up.component.css']
+  styleUrls: ['../auth/auth.component.css']
 })
 export class AuthSignUpComponent implements OnInit {
   newUser: NewUser;

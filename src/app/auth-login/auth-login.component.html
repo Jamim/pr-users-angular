@@ -1,16 +1,18 @@
-<div>
-  <label>Username:
-    <input #username required>
-  </label>
-</div>
-<div>
-  <label>Password:
-    <input #password type="password" required>
-  </label>
-</div>
-<button (click)="
+<div class="form-signin">
+
+  <label for="inputUsername" class="sr-only">Username</label>
+  <input #username class="form-control first-input"
+         id="inputUsername" placeholder="Username" required autofocus>
+
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input #password type="password" class="form-control last-input"
+         id="inputPassword" placeholder="Password" required>
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="
       login(username.value, password.value);
       username.value='';
       password.value=''">
-  Submit!
-</button>
+    Submit!
+  </button>
+
+</div>
