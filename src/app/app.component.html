@@ -19,33 +19,48 @@
 
       <div class="navbar-collapse" [ngbCollapse]="navbarCollapsed"
            id="navbarContent">
-        <ul class="navbar-nav mr-auto" style="text-align: right;">
+        <div class="mr-auto">
+          <ul class="navbar-nav" style="text-align: right;">
+            <li class="nav-item" [routerLinkActive]="['active']">
+              <a class="nav-link"
+                 routerLink="/users"
+                 (click)="navbarCollapsed = true">
+                Users
+              </a>
+            </li>
+          </ul>
+        </div>
 
-          <li class="nav-item" [routerLinkActive]="['active']">
-            <a class="nav-link"
-               routerLink="/users"
-               (click)="navbarCollapsed = true">
-              Users
-            </a>
-          </li>
+        <div class="float-right">
+          <ul class="navbar-nav" style="text-align: right;">
 
-          <li *ngIf="authService.loggedIn === false" class="nav-item"
-              [routerLinkActive]="['active']">
-            <a class="nav-link" routerLink="/auth"
-               (click)="navbarCollapsed = true">
-              Log In/Sign Up
-            </a>
-          </li>
+            <li *ngIf="authService.currentLogin" class="nav-item"
+                 [routerLinkActive]="['active']">
+              <a class="nav-link username"
+                 routerLink="/details/{{authService.currentLogin.id}}"
+                 (click)="navbarCollapsed = true">
+                {{authService.currentLogin.username}}
+              </a>
+            </li>
 
-          <li *ngIf="authService.loggedIn" class="nav-item"
-              [routerLinkActive]="['active']">
-            <a class="nav-link" routerLink="/logout"
-               (click)="navbarCollapsed = true">
-              Logout
-            </a>
-          </li>
+            <li *ngIf="authService.loginChecked && !authService.currentLogin"
+                class="nav-item" [routerLinkActive]="['active']">
+              <a class="nav-link" routerLink="/auth"
+                 (click)="navbarCollapsed = true">
+                Log In/Sign Up
+              </a>
+            </li>
 
-        </ul>
+            <li *ngIf="authService.currentLogin" class="nav-item"
+                [routerLinkActive]="['active']">
+              <a class="nav-link" routerLink="/logout"
+                 (click)="navbarCollapsed = true">
+                Logout
+              </a>
+            </li>
+
+          </ul>
+        </div>
       </div>
 
     </nav>

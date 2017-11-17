@@ -1,24 +1,22 @@
 <div class="container content-container">
-  <div *ngIf="authService.loggedIn !== null">
-    <div *ngIf="!authService.loggedIn">
+  <div *ngIf="authService.loginChecked && !authService.currentLogin">
 
-      <div class="form-signin form-mode">
-        <div class="btn-group" ngbRadioGroup name="radioBasic"
-             [(ngModel)]="authMode">
-          <label ngbButtonLabel class="btn-primary">
-            <input ngbButton type="radio" value="login">
-            Log In
-          </label>
-          <label ngbButtonLabel class="btn-primary">
-            <input ngbButton type="radio" value="signup">
-            Sign Up
-          </label>
-        </div>
+    <div class="form-signin form-mode">
+      <div class="btn-group" ngbRadioGroup name="radioBasic"
+           [(ngModel)]="authMode">
+        <label ngbButtonLabel class="btn-primary">
+          <input ngbButton type="radio" value="login">
+          Log In
+        </label>
+        <label ngbButtonLabel class="btn-primary">
+          <input ngbButton type="radio" value="signup">
+          Sign Up
+        </label>
       </div>
-
-      <app-auth-login *ngIf="authMode === 'login'"></app-auth-login>
-      <app-auth-sign-up *ngIf="authMode === 'signup'"></app-auth-sign-up>
-
     </div>
+
+    <app-auth-login *ngIf="authMode === 'login'"></app-auth-login>
+    <app-auth-sign-up *ngIf="authMode === 'signup'"></app-auth-sign-up>
+
   </div>
 </div>

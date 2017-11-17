@@ -1,17 +1,22 @@
 <div class="container content-container">
 
-  <div *ngIf="authService.loggedIn">
+  <div *ngIf="authService.currentLogin">
 
     <h3 *ngIf="users">Behold the Users!</h3>
     <h3 *ngIf="!users">Please, wait for a moment…</h3>
 
     <div class="users">
       <div class="user" *ngFor="let user of users">
-        <button routerLink="/details/{{user.id}}" class="btn btn-info">
+        <button routerLink="/details/{{user.id}}" class="btn"
+                [class.btn-primary]="authService.currentLogin.id === user.id"
+                [class.btn-info]="authService.currentLogin.id !== user.id">
           {{user.firstName}} {{user.lastName}}
         </button>
         <button class="delete" title="delete user" class="btn btn-dannger"
-            (click)="deleteUser(user)">x</button>
+                [disabled]="authService.currentLogin.id === user.id"
+                (click)="deleteUser(user)">
+          ✖
+        </button>
       </div>
     </div>
 
@@ -28,7 +33,8 @@
 
       <label for="inputPassword" class="sr-only">Password</label>
       <input [(ngModel)]="newUser.password" class="form-control middle-input"
-             id="inputPassword" placeholder="Password" required type="password">
+             id="inputPassword" placeholder="Password" required
+             type="password">
 
       <label for="inputFirstName" class="sr-only">First Name</label>
       <input [(ngModel)]="newUser.firstName" class="form-control middle-input"
@@ -49,7 +55,7 @@
 
   </div>
 
-  <div *ngIf="authService.loggedIn === false">
+  <div *ngIf="authService.loginChecked && !authService.currentLogin">
     <h2>
       We are so sorry, but there is nothing to show for anonymous persons!
     </h2>

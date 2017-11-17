@@ -21,9 +21,9 @@ export class AuthLogoutComponent implements OnInit {
   }
 
   logout(): void {
-    this.authService.logout().subscribe(
-      _ => {
-        if (!this.authService.loggedIn) {
+    this.authService.logout(
+      login => {
+        if (!login) {
           this.router.navigateByUrl('/auth');
         }
       }

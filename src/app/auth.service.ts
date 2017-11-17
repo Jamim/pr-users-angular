@@ -5,6 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { catchError, map, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie';
 
+import { Login } from './login';
 import { NewUser } from './user';
 
 const httpOptions = {
@@ -18,7 +19,7 @@ export class AuthService {
   private loginUrl = '/api/auth/login/';
   private logoutUrl = '/api/auth/logout/';
 
-  loggedIn: boolean;
+  currentLogin: Login;
   loginChecked = false;
 
   constructor(
@@ -26,45 +27,47 @@ export class AuthService {
     private cookieService: CookieService,
   ) { }
 
-  checkLogin() {
-    this.http.get(this.loginUrl).pipe(
-      tap(_ => {
-        this.loggedIn = true;
-        this.loginChecked = true;
-      }),
-      catchError(this.handleError<any>('checkLogin'))
-    ).subscribe();
+  setCurrentLogin(login: Login, callback?: (login: Login) => void): void {
+    this.currentLogin = login;
+    this.loginChecked = true;
+    if (callback) {
+      callback(login);
+    }
   }
 
-  signUp(user: NewUser): Observable<any> {
-    return this.http.post(this.signUpUrl, user, httpOptions).pipe(
-      tap(_ => this.loggedIn = true),
-      catchError(this.handleError<any>('signUp'))
-    );
+  checkLogin(): void {
+    this.http.get<Login>(this.loginUrl).pipe(
+      catchError(this.handleError<Login>('checkLogin'))
+    ).subscribe((login: Login) => this.setCurrentLogin(login));
   }
 
-  login(username: string, password: string): Observable<any> {
+  signUp(user: NewUser, callback: (login: Login) => void): void {
+    this.http.post<Login>(this.signUpUrl, user, httpOptions).pipe(
+      catchError(this.handleError<Login>('signUp'))
+    ).subscribe((login: Login) => this.setCurrentLogin(login, callback));
+  }
+
+  login(username: string, password: string,
+        callback: (login: Login) => void): void {
     const credentials = {
       username: username,
       password: password
     };
-    return this.http.post(this.loginUrl, credentials, httpOptions).pipe(
-      tap(_ => this.loggedIn = true),
-      catchError(this.handleError<any>('login'))
-    );
+    this.http.post<Login>(this.loginUrl, credentials, httpOptions).pipe(
+      catchError(this.handleError<Login>('login'))
+    ).subscribe((login: Login) => this.setCurrentLogin(login, callback));
   }
 
-  logout(): Observable<any> {
-    return this.http.post(this.logoutUrl, null, httpOptions).pipe(
-      tap(_ => this.loggedIn = false),
-      catchError(this.handleError<any>('logout'))
-    );
+  logout(callback: (login: Login) => void): void {
+    this.http.post<Login>(this.logoutUrl, null, httpOptions).pipe(
+      catchError(this.handleError<Login>('logout'))
+    ).subscribe((login: Login) => this.setCurrentLogin(login, callback));
   }
 
   private handleError<T> (operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       if (operation === 'checkLogin') {
-        this.loggedIn = false;
+        this.currentLogin = null;
         this.loginChecked = true;
       } else {
         console.error(error);

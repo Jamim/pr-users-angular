@@ -19,9 +19,9 @@ export class AuthLoginComponent implements OnInit {
   }
 
   login(username: string, password: string): void {
-    this.authService.login(username, password).subscribe(
-      _ => {
-        if (this.authService.loggedIn) {
+    this.authService.login(username, password,
+      login => {
+        if (login) {
           this.router.navigateByUrl('/users');
         }
       }

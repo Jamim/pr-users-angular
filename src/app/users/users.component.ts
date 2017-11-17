@@ -35,7 +35,7 @@ export class UsersComponent implements OnInit {
 
   getUsers(): void {
     if (this.authService.loginChecked) {
-      if (this.authService.loggedIn) {
+      if (this.authService.currentLogin) {
         this.userService.getUsers()
             .subscribe(users => this.users = users);
       }

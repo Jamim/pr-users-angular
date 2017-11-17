@@ -11,6 +11,10 @@ h3 {
   width: 80%;
 }
 
+.user .btn-primary {
+  width: 80%;
+}
+
 #addSomeone {
   margin-top: 6px;
 }

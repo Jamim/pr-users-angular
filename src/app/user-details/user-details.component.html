@@ -1,33 +1,38 @@
 <div class="container content-container">
   <div *ngIf="user" class="form-signin">
 
-    <h3>{{user.username}} details</h3>
+    <h3 *ngIf="isCurrent">Your details</h3>
+    <h3 *ngIf="!isCurrent">{{user.username}}'s details</h3>
 
     <div class="label-container">
       <label for="inputUsername">Username</label>
     </div>
     <input [(ngModel)]="user.username" class="form-control"
-           id="inputUsername" placeholder="Username" required autofocus>
+           id="inputUsername" placeholder="Username" required autofocus
+           [disabled]="isCurrent">
 
     <div class="label-container">
       <label for="inputFirstName">First Name</label>
     </div>
     <input [(ngModel)]="user.firstName" class="form-control"
-           id="inputFirstName" placeholder="First Name" required>
+           id="inputFirstName" placeholder="First Name" required
+           [disabled]="isCurrent">
 
     <div class="label-container">
       <label for="inputLastName">Last Name</label>
     </div>
     <input [(ngModel)]="user.lastName" class="form-control"
-           id="inputLastName" placeholder="Last Name" required>
+           id="inputLastName" placeholder="Last Name" required
+           [disabled]="isCurrent">
 
     <div class="label-container">
       <label for="inputEmail">Username</label>
     </div>
     <input [(ngModel)]="user.email" class="form-control"
-           id="inputEmail" placeholder="Email" required>
+           id="inputEmail" placeholder="Email" required
+           [disabled]="isCurrent">
 
-    <div class="buttons-container">
+    <div *ngIf="!isCurrent" class="buttons-container">
       <button (click)="save()" class="btn btn-success">Submit changes</button>
       <button (click)="goBack()" class="btn btn-light">Discard</button>
     </div>

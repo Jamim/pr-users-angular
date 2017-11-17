@@ -32,9 +32,9 @@ export class AuthSignUpComponent implements OnInit {
   }
 
   signUp(): void {
-    this.authService.signUp(this.newUser).subscribe(
-      _ => {
-        if (this.authService.loggedIn) {
+    this.authService.signUp(this.newUser,
+      login => {
+        if (login) {
           this.initNewUser();
           this.router.navigateByUrl('/users');
         }
